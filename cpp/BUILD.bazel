@@ -1,0 +1,13 @@
+load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
+
+pybind_extension(
+    name = "fib_module", 
+    srcs = ["fibx.cc"],
+    visibility = ["//visibility:public"],
+)
+
+# filegroup(
+    # name = "add_module_so", 
+    # srcs = ["add_module.so"], 
+    # visibility = ["//visibility:public"],
+# )

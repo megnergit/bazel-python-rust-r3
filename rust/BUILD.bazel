@@ -1,0 +1,19 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+# load("@rules_rust//rust:defs.bzl", "rust_library")
+
+rust_binary(
+    name = "hello", 
+    srcs = ["main.rs"],
+)
+
+# rust_library(
+#     name = "rusty", 
+#     srcs = ["lib.rs"], 
+#     crate_type = "cdylib", 
+#     deps = [
+#         "@crates_io//:pyo3", 
+#     ], 
+# )
+
+# load("@rules_rust_pyo3//:defs.bzl", "rust_pyo3_toolchain")
+# rust_pyo3_toolchain(name, pyo3, pyo3_introspection)

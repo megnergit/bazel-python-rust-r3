@@ -1,0 +1,43 @@
+# bazel_dep(name = "rules_cc", version = "0.2.14")
+bazel_dep(name = "rules_python", version = "1.7.0")
+bazel_dep(name = "pybind11_bazel", version = "2.13.6") # 3.0.0
+# bazel_dep(name = "rules_rust", version = "0.67.0")
+# bazel_dep(name = "rules_pyo3", version = "0.21.2")
+# bazel_dep(name = "rules_rust_pyo3", version = "0.67.0")
+bazel_dep(name = "platforms", version = "0.0.11")
+#----------------- python -----------------------
+
+# python = use_extension("@rules_python//python:extensions.bzl", "python")
+# python.toolchain(python_version = "3.11")
+
+# use_repo(python, "python_3_11")
+
+#----------------- cc ----------------------------
+#----------------- rust --------------------------
+
+# rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+# rust.toolchain(edition = "2021")
+
+# use_repo(rust, "rust_toolchains")
+
+#----------------- pyo3 --------------------------
+
+# register_toolchains(
+    # "@rules_pyo3//pyo3/toolchains:toolchain", 
+    # "@rules_pyo3//pyo3/toolchains:rust_toolchain",
+# )
+
+#----------------- crates (substitute for cargo) --
+# crate = use_extension("@rules_rust//crate_universe:extension.bzl", 
+                       #"crate_universe")
+
+# crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+# crate.from_cargo(
+    # name = "crates",
+    # cargo_lockfile = "//:Cargo.lock",
+#     manifests = ["//:Cargo.toml"],
+# )
+# use_repo(crate, "crates")
+
+
+#------------------ END --------------------------
