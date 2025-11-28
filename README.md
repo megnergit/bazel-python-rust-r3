@@ -10,7 +10,8 @@
 - [Run Python Code by Basel](#run-python-by-bazel)
   - [Performance Test 2](#performance-test-2)
 
-- [Build Python and C++ Code by Bazel]
+- [Build Python and C++ Code by Bazel](#build-python-and-c-code-by-bazel)
+  - [Performance Test 3](#performance-test-3) 
 
 
 ---
@@ -498,9 +499,7 @@ RUNFILES_DIR: /private/var/tmp/_bazel_meg/577fcf44d4e22393c110bef87b8577b8/execr
 CPP_DIR: /private/var/tmp/_bazel_meg/577fcf44d4e22393c110bef87b8577b8/execroot/_main/bazel-out/darwin_x86_64-fastbuild/bin/py/fib_cpp_offload.runfiles/_main/cpp
 C++ fib(33) = 3524578
 [meg@elias ~/rust/bazel-python-rust-r3]$ 
-
 ....
-
 ```
 
 **Summary**
@@ -519,7 +518,7 @@ Satisfied.
 
 ---
 
-# Build Python and Rust code by Bazel -> does not work
+# Build Python and Rust code by Bazel -> did not work
 
 
 
