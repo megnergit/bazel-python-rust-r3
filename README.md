@@ -66,11 +66,9 @@ We will do the following.
 1. Build Python and Rust code **separately** by bazel. 
 2. Build Python and C++ code **together** by basel.  
 3. Build Python and Rust code **together** by basel.  
-4. Combine Python, Rust, and C++ by basel. 
 
 
-Every time we complete these sub-projects, we will measure the advantage of 
-bazel, such as 
+Every time we complete these sub-projects, we will measure the advantage of bazel, such as 
 
 - acceleration of build by bazel 
 - offloading compute-intensive function to Rust/C++
@@ -517,6 +515,11 @@ Fibonacci # |  Python | C++ offload
 36	        | 2.873 s |  0.201 s
 
 Satisfied. 
+
+
+---
+
+# Build Python and Rust code by Bazel -> does not work
 
 
 

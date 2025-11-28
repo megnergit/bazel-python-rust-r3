@@ -2,18 +2,18 @@ use pyo3::prelude::*;
 
 #[pyfunction]
 fn fib(n: u64) -> u64 {
-    match n {
-
-        0 => 0, 
-        1 => 1, 
-        _ => fib(n - 1) + fib(n - 2), 
-
+    fn inner(x: u64) -> u64 {
+        match x {
+            0 => 0,
+            1 => 1,
+            _ => inner(x - 1) + inner(x - 2),
+        }
     }
+    inner(n)
 }
 
 #[pymodule]
-fn rusty (_py: Python, m: &PyModule) -> PyResult<()> {
-
+fn rust_fib(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(fib, m)?)?;
     Ok(())
 }

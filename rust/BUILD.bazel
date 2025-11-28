@@ -1,18 +1,75 @@
-load("@rules_rust//rust:defs.bzl", "rust_binary")
-# load("@rules_rust//rust:defs.bzl", "rust_library")
+# load("@rules_rust//rust:defs.bzl", "rust_binary")
+# load("@rules_rust//rust:defs.bzl", "rust_shared_library")
+load("@rules_rust//rust:defs.bzl", "rust_library")
+# load("@rules_rust_pyo3//:defs.bzl", "pyo3_toolchain")
+# load("@rules_rust_pyo3//:defs.bzl", "rust_pyo3_toolchain")
+load("@rules_rust_pyo3//:defs.bzl", "pyo3_extension")
 
-rust_binary(
-    name = "hello", 
-    srcs = ["main.rs"],
+
+rust_library(
+    name = "rust_fib_lib", 
+    srcs = ["lib.rs"], 
+    edition = "2021",
+    deps = [],
 )
 
-# rust_library(
-#     name = "rusty", 
+pyo3_extension(
+    name = "rust_fib", 
+#    crate = ":rust_fib_lib",
+#    python_version = "3.11",
+    srcs = ["lib.rs"],
+    visibility = ["//visibility:public"],
+
+)
+
+#---------------------------------------------
+# rust_binary(
+#     name = "hello", 
+#     srcs = ["main.rs"],
+# )
+
+# pyo3_toolchain(
+#     name = "rust_fib", 
+#     srcs = ["lib.rs"],
+# #    visibility = ["//visibility:public"],
+
+# )
+
+# rust_pyo3_toolchain(
+#     name = "rust_fib", 
+#     srcs = ["lib.rs"],
+# #    visibility = ["//visibility:public"],
+
+# )
+
+# pyo3_extension(
+#     name = "rust_fib", 
+#     srcs = ["lib.rs"],
+# #    visibility = ["//visibility:public"],
+
+# )
+
+
+# rust_shared_library(
+#     name = "rust_fib", 
 #     srcs = ["lib.rs"], 
 #     crate_type = "cdylib", 
+# #    crate_root = "lib.rs",
+# #    deps = [
+#         #"@crate_io//:pyo3", 
+# #    ], 
+#     visibility = ["//visibility:public"]
+# )
+
+# rust_library(
+#     name = "rust_fib", 
+#     srcs = ["lib.rs"], 
+# #    crate_type = "cdylib", 
+#     crate_root = "lib.rs",
 #     deps = [
-#         "@crates_io//:pyo3", 
+#         "@crate_io//:pyo3", 
 #     ], 
+#     visibility = ["//visibility:public"]
 # )
 
 # load("@rules_rust_pyo3//:defs.bzl", "rust_pyo3_toolchain")

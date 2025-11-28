@@ -1,18 +1,27 @@
 load("@rules_python//python:defs.bzl", "py_binary") 
 
 py_binary(
-    name = "fib_python_only", 
-    srcs = ["fib_python_only.py"],
-)
-
-py_binary(
-    name = "fib_cpp_offload", 
-    srcs = ["fib_cpp_offload.py"],
+    name = "fib_rust_offload", 
+    srcs = ["fib_rust_offload.py"],
     deps = [
-        "//cpp:fib_module", 
+        "//rust:rust_fib", 
     ], 
 )
 
+# py_binary(
+#     name = "fib_python_only", 
+#     srcs = ["fib_python_only.py"],
+# )
+
+# py_binary(
+#     name = "fib_cpp_offload", 
+#     srcs = ["fib_cpp_offload.py"],
+#     deps = [
+#         "//cpp:fib_module", 
+#     ], 
+# )
+
+#--------------------------
 
 # py_binary(
     # name = "hello", 

@@ -1,16 +1,39 @@
 # bazel_dep(name = "rules_cc", version = "0.2.14")
 bazel_dep(name = "rules_python", version = "1.7.0")
-bazel_dep(name = "pybind11_bazel", version = "2.13.6") # 3.0.0
-# bazel_dep(name = "rules_rust", version = "0.67.0")
+# bazel_dep(name = "pybind11_bazel", version = "2.13.6") # 3.0.0
+bazel_dep(name = "rules_rust", version = "0.67.0")
+
 # bazel_dep(name = "rules_pyo3", version = "0.21.2")
-# bazel_dep(name = "rules_rust_pyo3", version = "0.67.0")
-bazel_dep(name = "platforms", version = "0.0.11")
+bazel_dep(name = "rules_rust_pyo3", version = "0.67.0")
+# bazel_dep(name = "platforms", version = "0.0.11")
+bazel_dep(name = "platforms", version = "1.0.0")
+
+#----------------- pyo3 --------------------------
+register_toolchains(
+    "@rules_rust_pyo3//pyo3/toolchains:toolchain", 
+    "@rules_rust_pyo3//pyo3/toolchains:rust_toolchain",
+)
 #----------------- python -----------------------
+
+# rust = use_extension("@rules_rust//crate_universe:extension.bzl", 
+#                      "crate")
+
+# rust.repository(
+#     name = "crate_index", 
+#     crates = {
+#         "pyo3": "0.21.2",
+#     }
+# )
+
+# use_repo(rust, "crate_index")
+
+# register_toolchains("@rules_rust//rust/toolchain:all")
 
 # python = use_extension("@rules_python//python:extensions.bzl", "python")
 # python.toolchain(python_version = "3.11")
 
 # use_repo(python, "python_3_11")
+# register_toolchains("@rules_rust_pyo3//:all")
 
 #----------------- cc ----------------------------
 #----------------- rust --------------------------
@@ -20,16 +43,10 @@ bazel_dep(name = "platforms", version = "0.0.11")
 
 # use_repo(rust, "rust_toolchains")
 
-#----------------- pyo3 --------------------------
-
-# register_toolchains(
-    # "@rules_pyo3//pyo3/toolchains:toolchain", 
-    # "@rules_pyo3//pyo3/toolchains:rust_toolchain",
-# )
 
 #----------------- crates (substitute for cargo) --
-# crate = use_extension("@rules_rust//crate_universe:extension.bzl", 
-                       #"crate_universe")
+# rust = use_extension("@rules_rust//crate_universe:extension.bzl", 
+#                      "crate")
 
 # crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
 # crate.from_cargo(
@@ -39,5 +56,15 @@ bazel_dep(name = "platforms", version = "0.0.11")
 # )
 # use_repo(crate, "crates")
 
+# rust.repository(
+#     name = "crate_index", 
+#     crates = {
+#         "pyo3": "0.21.2",
+#     }
+# )
+
+# use_repo(rust, "crate_index")
+
+# register_toolchains("@rules_rust//rust/toolchain:all")
 
 #------------------ END --------------------------
