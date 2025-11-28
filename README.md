@@ -433,23 +433,90 @@ It seems that such stuff would be well taken care of builder (=bazel), but appar
 
 ## Performance Test 3!
 
+We will compare the speed of Fibonacci series in 
+
+1. python only
+2. C++ offloaded. built and run by Bazel. 
 
 
 ```sh
-$ time python 
+$ time python py/fib_python_only.py 32
+n = 32
+Python fib(32) = 2178309
+python py/fib_python_only.py 32  0.53s user 0.07s system 96% cpu 0.627 total
+$ time python py/fib_python_only.py 33
+n = 33
+Python fib(33) = 3524578
+python py/fib_python_only.py 33  0.77s user 0.07s system 97% cpu 0.853 total
+$ time python py/fib_python_only.py 34
+n = 34
+Python fib(34) = 5702887
+python py/fib_python_only.py 34  1.15s user 0.07s system 98% cpu 1.234 total
+$ time python py/fib_python_only.py 35
+n = 35
+Python fib(35) = 9227465
+python py/fib_python_only.py 35  1.78s user 0.07s system 98% cpu 1.866 total
+$ time python py/fib_python_only.py 36
+n = 36
+Python fib(36) = 14930352
+python py/fib_python_only.py 36  2.79s user 0.07s system 99% cpu 2.873 total
+$ 
+```
+
+Then offloaded-to-C++ version. Firts clean the artefact. 
+
+```sh bazel
+$ bazel clean --expunge
+```
+
+Then, 
+```sh bazel
+$ bazel  run //py:fib_cpp_offload -- 32
+WARNING: Ignoring JAVA_HOME, because it must point to a JDK, not a JRE.
+Starting local Bazel server (8.4.2) and connecting to it...
+INFO: Analyzed target //py:fib_cpp_offload (84 packages loaded, 3545 targets configured).
+INFO: Found 1 target...
+Target //py:fib_cpp_offload up-to-date:
+  bazel-bin/py/fib_cpp_offload
+INFO: Elapsed time: 12.507s, Critical Path: 2.62s
+INFO: 13 processes: 11 internal, 2 darwin-sandbox.
+INFO: Build completed successfully, 13 total actions
+INFO: Running command line: bazel-bin/py/fib_cpp_offload <args omitted>
+RUNFILES_DIR: /private/var/tmp/_bazel_meg/577fcf44d4e22393c110bef87b8577b8/execroot/_main/bazel-out/darwin_x86_64-fastbuild/bin/py/fib_cpp_offload.runfiles/_main/py
+CPP_DIR: /private/var/tmp/_bazel_meg/577fcf44d4e22393c110bef87b8577b8/execroot/_main/bazel-out/darwin_x86_64-fastbuild/bin/py/fib_cpp_offload.runfiles/_main/cpp
+C++ fib(32) = 2178309
 
 
+must point to a JDK, not a JRE.
+INFO: Analyzed target //py:fib_cpp_offload (32 packages loaded, 316 targets configured).
+INFO: Found 1 target...
+Target //py:fib_cpp_offload up-to-date:
+  bazel-bin/py/fib_cpp_offload
+INFO: Elapsed time: 0.501s, Critical Path: 0.01s
+INFO: 1 process: 1 action cache hit, 1 internal.
+INFO: Build completed successfully, 1 total action
+INFO: Running command line: bazel-bin/py/fib_cpp_offload <args omitted>
+RUNFILES_DIR: /private/var/tmp/_bazel_meg/577fcf44d4e22393c110bef87b8577b8/execroot/_main/bazel-out/darwin_x86_64-fastbuild/bin/py/fib_cpp_offload.runfiles/_main/py
+CPP_DIR: /private/var/tmp/_bazel_meg/577fcf44d4e22393c110bef87b8577b8/execroot/_main/bazel-out/darwin_x86_64-fastbuild/bin/py/fib_cpp_offload.runfiles/_main/cpp
+C++ fib(33) = 3524578
+[meg@elias ~/rust/bazel-python-rust-r3]$ 
+
+....
+
+```
+
+**Summary**
 
 
+Fibonacci # |  Python | C++ offload
+------------|---------|------------- 
+32	        | 0.627 s |  12.5 s (First time)
+33 	        | 0.853 s |  0.501 s
+34	        | 1.234 s |  0.167 s
+35 	        | 1.866 s |  0.177 s
+36	        | 2.873 s |  0.201 s
 
-
-
-
-
-
-
-
-
+Satisfied. 
 
 
 
